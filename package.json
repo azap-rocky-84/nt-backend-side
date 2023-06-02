@@ -1,0 +1,27 @@
+{
+  "name": "nt-backend-side",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node -r esm server.js",
+    "dev": "nodemon -r esm server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfonso-zappia08/nt-backend-side.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfonso-zappia08/nt-backend-side/issues"
+  },
+  "homepage": "https://github.com/alfonso-zappia08/nt-backend-side#readme",
+  "dependencies": {
+    "dotenv": "^16.1.3",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.2"
+  }
+}
