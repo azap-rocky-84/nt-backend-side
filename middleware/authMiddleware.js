@@ -17,4 +17,13 @@ export const authGuard = async(req, res, next) =>{
         error.statusCode = 401;
         next(error);
     }
+};
+export const adminGuard = (req, res, next) => {
+    if(req.user && req.user.admin){
+        next();
+    } else {
+        let error = new Error("Non sei autorizzato come amministatore");
+        error.statusCode = 401;
+        next(error);
+    }
 }
