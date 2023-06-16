@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from 'path';
 import connectDB from "./config/db";
 import userRoutes from "./routes/userRoutes";
 import { errorResponserHandler, invalidPathHandler } from "./middleware/errorHandler";
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
     res.send("Il server va...");
 });
 app.use('/api/users', userRoutes);
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.use(invalidPathHandler);
 app.use(errorResponserHandler);
 const PORT = process.env.PORT || 5000;

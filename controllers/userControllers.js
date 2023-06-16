@@ -78,8 +78,8 @@ const updateProfile = async (req, res, next) => {
         }
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email;
-        if(req.body.password && req.body.password.lenght < 6){
-            throw new Error("La lunghezza della password deve essere di almeno sei caratteri");
+        if(req.body.password && req.body.password.lenght < 8){
+            throw new Error("La lunghezza della password deve essere di almeno otto caratteri");
         } else if(req.body.password){
             user.password = req.body.password;
         }
