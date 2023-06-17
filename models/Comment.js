@@ -6,7 +6,7 @@ const CommentSchema = new Schema({
     check: {type: Boolean, default: false},
     parent: {type: Schema.Types.ObjectId, ref: "Comment", default: null},
     replyOnUser: {type: Schema.Types.ObjectId, ref: "User", default: null},
-}, {timestamps: true}
+}, {timestamps: true, toJSON:{virtuals:true}}
 );
 CommentSchema.virtual('replies', {
     ref: "Comment",
