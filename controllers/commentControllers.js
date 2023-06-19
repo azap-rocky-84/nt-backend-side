@@ -22,4 +22,20 @@ const createComment = async (req, res, next) => {
       next(error);
     }
   };
-export {createComment};
+
+  const updateComment = async (req, res, next) => {
+    try {
+      const { desc } = req.body;
+      const comment = await Comment.findById(req.params.commentId);
+      if (!comment) {
+        const error = new Error("Commento non trovato");
+        return next(error);
+      }
+      comment.desc = desc || comment.desc;
+      const updatedComment = await comment.save();
+      return res.json(updatedComment);
+    } catch (error) {
+      next(error);
+    }
+  };
+export {createComment, updateComment};
