@@ -142,16 +142,6 @@ const getAllPosts = async (req, res, next) => {
         const skip = (page-1) * pageSize;
         const total = await Post.find(where).countDocuments();
         const pages = Math.ceil(total/pageSize);
-        if(page>pages){
-            const error = new Error("Nessuna pagina trovata");
-            return next(error);
-        }
-        const result = await query.skip(skip).limit(pageSize).populate([
-            {
-                path: "user",
-                select: ['avatar', "name", "verified"],
-            },
-        ]).sort({updatedAt: 'desc'});
         res.header({
             'x-filter':  filter,
             'x-totalcount': JSON.stringify(total),
@@ -159,6 +149,15 @@ const getAllPosts = async (req, res, next) => {
             'x-pagesize': JSON.stringify(pageSize),
             'x-totalpagecount': JSON.stringify(pages),
         });
+        if(page>pages){
+           return res.json([]);
+        }
+        const result = await query.skip(skip).limit(pageSize).populate([
+            {
+                path: "user",
+                select: ['avatar', "name", "verified"],
+            },
+        ]).sort({updatedAt: 'desc'});
         return res.json(result);
     } catch (error) {
         next(error);
