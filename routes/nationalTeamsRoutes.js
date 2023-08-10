@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
-import {createNt} from '../controllers/nationalTeamsControllers';
+import {createNt, deleteNt, getAllNt, getNt, updateNt} from '../controllers/nationalTeamsControllers';
 import {authGuard, adminGuard} from '../middleware/authMiddleware';
-router.post("/", authGuard, adminGuard, createNt);
-
+router.route("/").post(authGuard, adminGuard, createNt).get(getAllNt);
+router.route("/:fifaCode").put(authGuard, adminGuard, updateNt).delete(authGuard, adminGuard, deleteNt).get(getNt);
 export default router;
